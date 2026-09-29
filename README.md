@@ -6,6 +6,7 @@ Comment Growth AI is an AI-powered comment intelligence platform that helps user
 
 This repository contains the Comment Growth AI product foundation: a feature-based Next.js workspace, a separate API scaffold, reusable AI/type/database packages, and a responsive intelligence experience backed by clearly labeled local demo data.
 
+![alt text](image.png)
 ## Product Focus
 
 - Discover high-value commenting opportunities
@@ -55,7 +56,6 @@ Screens use feature-owned services and state. The current records and AI generat
 ## Styling
 
 The web app uses Tailwind CSS v4 through Next.js PostCSS (`@tailwindcss/postcss`). Its global stylesheet imports `@companyio/platform-ui/styles.css` and scans `apps/web/app` and `apps/web/features` for app utility classes.
-![alt text](image.png)
 ## Environment
 
 Copy the example environment file and update the values for your local environment:
