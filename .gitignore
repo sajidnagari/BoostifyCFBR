@@ -6,7 +6,7 @@ apps/web/.next
 apps/web/out
 apps/node_modules
 apps/web/dist
-docs
+/docs
 
 
 .env
