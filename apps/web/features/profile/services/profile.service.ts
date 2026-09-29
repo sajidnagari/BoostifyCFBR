@@ -1,4 +1,4 @@
-import { demoExpertiseProfile, profileStorageKey } from '../constants';
+import { demoExpertiseProfile, profileStorageKey, profileUpdatedEvent } from '../constants';
 import type { ExpertiseProfile } from '../types/profile';
 
 export function getDemoProfile(): ExpertiseProfile {
@@ -17,7 +17,16 @@ export function loadSavedProfile(): ExpertiseProfile {
   }
 }
 
+export function publishProfileUpdate(profile: ExpertiseProfile): void {
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent<ExpertiseProfile>(profileUpdatedEvent, { detail: profile }));
+  }
+}
+
 export function saveProfile(profile: ExpertiseProfile): ExpertiseProfile {
-  if (typeof window !== 'undefined') window.localStorage.setItem(profileStorageKey, JSON.stringify(profile));
+  if (typeof window !== 'undefined') {
+    window.localStorage.setItem(profileStorageKey, JSON.stringify(profile));
+    publishProfileUpdate(profile);
+  }
   return profile;
 }

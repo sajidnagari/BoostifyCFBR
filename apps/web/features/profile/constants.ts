@@ -14,3 +14,4 @@ export const demoExpertiseProfile: ExpertiseProfile = {
 };
 
 export const profileStorageKey = 'comment-growth-ai:demo-profile';
+export const profileUpdatedEvent = 'comment-growth-ai:profile-updated';

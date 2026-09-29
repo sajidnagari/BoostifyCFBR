@@ -22,6 +22,7 @@ import {
   X,
 } from 'lucide-react';
 import { Button } from '@companyio/platform-ui/dist/components/ui/button';
+import { useProfile } from '../../features/profile/hooks/use-profile';
 
 const primaryNavigation = [
   { href: '/dashboard', label: 'Overview', icon: LayoutDashboard },
@@ -54,6 +55,10 @@ function isActivePath(pathname: string, href: string) {
   return pathname === href || (href !== '/dashboard' && pathname.startsWith(`${href}/`));
 }
 
+function getInitials(name: string) {
+  return name.trim().split(/\s+/).slice(0, 2).map((part) => part.charAt(0)).join('').toUpperCase() || 'U';
+}
+
 function NavigationLink({ href, label, icon: Icon, active, compact = false, onClick }: {
   href: string;
   label: string;
@@ -79,6 +84,7 @@ function NavigationLink({ href, label, icon: Icon, active, compact = false, onCl
 
 export function ProductShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const { profile } = useProfile();
   const [mobileMoreOpen, setMobileMoreOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -118,10 +124,10 @@ export function ProductShell({ children }: { children: React.ReactNode }) {
 
         <div className="border-t border-white/8 p-4">
           <div className="flex items-center gap-3 rounded-md px-2 py-2">
-            <span className="grid size-9 shrink-0 place-items-center rounded-full bg-[#d9e2db] text-sm font-bold text-[#24483a]">MC</span>
+            <span className="grid size-9 shrink-0 place-items-center rounded-full bg-[#d9e2db] text-sm font-bold text-[#24483a]">{getInitials(profile.name)}</span>
             <span className="min-w-0 flex-1">
-              <span className="block truncate text-[13px] font-medium">Morgan Chen</span>
-              <span className="block text-[11px] text-[#9db5a8]">Product strategist</span>
+              <span className="block truncate text-[13px] font-medium">{profile.name || 'Your profile'}</span>
+              <span className="block truncate text-[11px] text-[#9db5a8]">{profile.role || 'Add your role'}</span>
             </span>
             <CircleHelp className="size-4 text-[#9db5a8]" aria-hidden="true" />
           </div>
