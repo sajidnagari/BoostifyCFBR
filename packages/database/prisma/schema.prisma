@@ -1,0 +1,126 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id        String    @id @default(cuid())
+    email     String    @unique
+    name      String?
+    createdAt DateTime  @default(now())
+    profile   Profile?
+    posts     Post[]
+    comments  Comment[]
+}
+
+model Profile {
+    id           String   @id @default(cuid())
+    userId       String   @unique
+    role         String?
+    industry     String?
+    skills       String[]
+    interests    String[]
+    tone         String?
+    writingStyle String?
+    user         User     @relation(fields: [userId], references: [id])
+}
+
+model SocialAccount {
+    id          String   @id @default(cuid())
+    platform    String
+    handle      String
+    accessToken String?
+    createdAt   DateTime @default(now())
+}
+
+model Post {
+    id              String    @id @default(cuid())
+    userId          String
+    author          String?
+    title           String
+    body            String
+    platform        String
+    engagementScore Float?
+    createdAt       DateTime  @default(now())
+    user            User      @relation(fields: [userId], references: [id])
+    comments        Comment[]
+}
+
+model Comment {
+    id           String               @id @default(cuid())
+    userId       String
+    postId       String?
+    content      String
+    type         String?
+    qualityScore Float?
+    createdAt    DateTime             @default(now())
+    author       User                 @relation(fields: [userId], references: [id])
+    post         Post?                @relation(fields: [postId], references: [id])
+    analysis     CommentAnalysis?
+    performances CommentPerformance[]
+}
+
+model CommentAnalysis {
+    id                String   @id @default(cuid())
+    commentId         String   @unique
+    type              String
+    relevanceScore    Float?
+    valueScore        Float?
+    originalityScore  Float?
+    conversationScore Float?
+    qualityScore      Float?
+    sentiment         String?
+    reasoning         String?
+    model             String?
+    createdAt         DateTime @default(now())
+    comment           Comment  @relation(fields: [commentId], references: [id])
+}
+
+model CommentPerformance {
+    id             String   @id @default(cuid())
+    commentId      String
+    likes          Int?
+    replies        Int?
+    views          Int?
+    profileVisits  Int?
+    engagementRate Float?
+    recordedAt     DateTime @default(now())
+    comment        Comment  @relation(fields: [commentId], references: [id])
+}
+
+model Opportunity {
+    id                  String   @id @default(cuid())
+    title               String
+    topic               String?
+    author              String?
+    opportunityScore    Float?
+    recommendedStrategy String?
+    createdAt           DateTime @default(now())
+}
+
+model Recommendation {
+    id         String   @id @default(cuid())
+    title      String
+    summary    String
+    confidence Float?
+    createdAt  DateTime @default(now())
+}
+
+model AIInteraction {
+    id        String   @id @default(cuid())
+    model     String
+    input     String
+    output    String
+    createdAt DateTime @default(now())
+}
+
+model Strategy {
+    id          String   @id @default(cuid())
+    name        String
+    description String?
+    createdAt   DateTime @default(now())
+}

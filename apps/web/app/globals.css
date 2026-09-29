@@ -1,0 +1,14 @@
+@import '@companyio/platform-ui/styles.css';
+
+@source '../app/**/*.{js,ts,jsx,tsx,mdx}';
+@source '../features/**/*.{js,ts,jsx,tsx,mdx}';
+
+@layer base {
+  body {
+    @apply bg-white text-gray-900;
+  }
+
+  a {
+    @apply text-inherit no-underline;
+  }
+}

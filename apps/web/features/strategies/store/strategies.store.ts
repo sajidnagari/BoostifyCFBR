@@ -1,0 +1,1 @@
+export const strategiesStore = { scope: 'strategies feature' };

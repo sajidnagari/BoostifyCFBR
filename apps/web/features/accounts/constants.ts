@@ -1,0 +1,1 @@
+export const accountPlatforms = ['LinkedIn', 'X'] as const;

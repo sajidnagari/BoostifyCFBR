@@ -1,0 +1,1 @@
+export const accountsStore = { scope: 'accounts feature' };

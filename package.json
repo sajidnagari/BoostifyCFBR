@@ -1,0 +1,28 @@
+{
+  "name": "comment-growth-ai",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "dev": "turbo run dev --filter=web",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "format": "prettier --write ."
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "@companyio/platform-ui@0.1.33": "patches/@companyio__platform-ui@0.1.33.patch"
+    }
+  },
+  "dependencies": {
+    "@companyio/platform-ui": "^0.1.33"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.12",
+    "eslint": "^8.57.0",
+    "prettier": "^3.3.1",
+    "turbo": "^2.1.5",
+    "typescript": "^5.5.4"
+  }
+}
