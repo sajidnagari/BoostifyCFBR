@@ -16,4 +16,3 @@ coverage
 .DS_Store
 *.log
 patches
-/patches
